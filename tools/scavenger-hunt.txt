@@ -1,0 +1,8 @@
+1. curl ident.me, ifconfig (For the bonus question: I don't know, maybe you can tell by the 'inet' and 'ether' keywords?)
+2. nslookup (url), host (url), dig (url)
+3. dig -x (ip_address), host (ip_address), nslookup (ip_address)
+4. (1) cd (folder_to_save_the_file_in), (2) sftp (username)@(server_ip_or_remote_hostname), (3) cd (folder_containing_file_to_be_transfered), (4) get (filename) to get a single file / get -r (foldername) to get the entire folder
+5. lsof -i :(port_name)
+6. lsof -i, sudo netstat -ltup (this did not work for me for some reason that I don't understand)
+7. (1) cd (folder_to_save_the_file_in) (2) wget (url)
+8. curl -I (url), wget -S --spider (url)

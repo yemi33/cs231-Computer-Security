@@ -1,0 +1,37 @@
+Yemi Shin & Nick Pandelaskis
+
+=====DAYTIME=====
+1. 
+1	0.000000000	10.0.2.15	129.6.15.28	TCP	74	44930 → 13 [SYN] Seq=0 Win=64240 Len=0 MSS=1460 SACK_PERM=1 TSval=3461050185 TSecr=0 WS=128
+2	0.032886025	129.6.15.28	10.0.2.15	TCP	60	13 → 44930 [SYN, ACK] Seq=0 Ack=1 Win=32768 Len=0 MSS=1460
+3	0.032915543	10.0.2.15	129.6.15.28	TCP	54	44930 → 13 [ACK] Seq=1 Ack=1 Win=64240 Len=0
+
+2. 44930, A single machine might have multiple client programs requesting services from the server. In order to identify the correct client, the interaction requires the port number as an identification for the client program.
+
+3. 4	0.065362699	129.6.15.28	10.0.2.15	DAYTIME	105	DAYTIME Response
+
+4. 
+Daytime: \n59307 21-04-03 20:42:58 50 0 0  23.9 UTC(NIST) * \n
+59307: Modified Julian Date (MJD). 
+21-04-03: Date.
+20:42:58: Time.
+50:  Indicates whether the United States is on Standard Time (ST) or Daylight Saving Time (DST). 50 means Daylight Savings Time is in effect.
+0: Indicates whether a leap second will be added or subtracted at midnight on the last day of the current month. 0 means no leap second will occur this month.
+0: Indicates the health of the server. If H = 0, the server is healthy.
+23.9: number of milliseconds that NIST advances the time code to partially compensate for network delays.
+UTC(NIST): label indicating that you've received Coordinated Universal Time from the National Institute of Standards and Technology (NIST)
+*: "on-time" marker
+
+5. [SYN] means synchronization, which menas the client is trying to access the data that the server holds
+6. [ACK] means acknowledgement, which means that the server acknowledges the request
+7. [FIN] means finish, which means that the interaction is about to end, after whatever transaction has been made
+
+8. The daytime server initiated the closing of the TCP connection, because the source of this packet is the daytime server.
+
+=====HTTP=====
+1. Two TCP connections happened
+2. 7	0.047871558	10.0.2.15	45.79.89.123	HTTP	395	GET /index.html HTTP/1.1
+3. 8	0.183827957	10.0.2.15	45.79.89.123	HTTP	473	GET /jeff_square_head.jpg HTTP/1.1
+
+=====QUESTIONS=====
+1. This for the HTTP experiment. The first time we ran wireshark, there were two TCP handshakes that were noted, but there was no retrieval of Jeff's picture. We assumed it was a browser cache issue, so we hard refreshed and ran wireshark again, and this time there was a GET method for the picture, but only one TCP handshake was noted. We want to know why this might have happened. 

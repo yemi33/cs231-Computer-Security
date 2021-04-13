@@ -1,0 +1,161 @@
+Rebecca Fox and Yemi Shin
+
+==================DIFFIE-HELLMAN=====================
+g = 17, p = 61
+A ==> B: 46 (A)
+B ==> A: 5 (B)
+
+46 = 17^x mod 61		x = 14 
+5 = 17^y mod 61		y = 26
+
+Shared Secret 	= B^x mod p 	= A^y mod p
+		= 5^14 mod 61	= 46^26 mod 61
+		= 12		= 12
+
+If the integers were much larger, you could not figure out x or y because there could be several options of x and y that could be less than p when p is larger. 
+
+=======================RSA==========================
+
+(e_Bob, n_Bob) = (31, 4661) --> bob Public Key
+
+Message = [2677, 4254, 1152, 4645, 4227, 1583, 2252, 426, 3492, 4227, 3889, 1789, 4254, 1704, 1301, 4227, 1420, 1789, 1821, 1466, 4227, 2252, 3303, 1420, 2234, 4227, 4227, 1789, 1420, 1420, 4402, 1466, 4070, 3278, 3278, 414, 414, 414, 2234, 1466, 1704, 1789, 2955, 4254, 1821, 4254, 4645, 2234, 1704, 2252, 3282, 3278, 426, 2991, 2252, 1604, 3278, 1152, 4645, 1704, 1789, 1821, 4484, 4254, 1466, 3278, 1512, 3602, 1221, 1872, 3278, 1221, 1512, 3278, 4254, 1435, 3282, 1152, 1821, 2991, 1945, 1420, 4645, 1152, 1704, 1301, 1821, 2955, 1604, 1945, 1221, 2234, 1789, 1420, 3282, 2991, 4227, 4410, 1821, 1301, 4254, 1466, 3454, 4227, 4410, 2252, 3303, 4645, 4227, 3815, 4645, 1821, 4254, 2955, 2566, 3492, 4227, 3563, 2991, 1821, 1704, 4254]
+
+
+Each character -> x^e mod n
+n = p*q, e*d mod (p-1)(q-1) = 1
+4661 = p > 31, q > 31
+Using brute force found that 4661 = 59 * 79 p = 59, q = 79
+e*d mod (p-1)(q-1) = 1
+31*d mod (78 * 58) = 1
+d = 2335 (question? What is the constraint for d? We are operating under the assumption that it needs to be less than n)
+Decrypt: y^d mod n ==> y^2335 mod 4661
+Private key = (2335, 4661)
+(Used a google sheet to calculate all of the numbers)
+
+68
+101
+97
+114
+32
+66
+111
+98
+44
+114
+67
+104
+101
+99
+107
+32
+116
+104
+105
+115
+32
+111
+117
+116
+46
+32
+32
+104
+116
+116
+112
+115
+58
+47
+47
+119
+119
+119
+46
+115
+99
+104
+110
+101
+105
+101
+114
+46
+99
+111
+109
+47
+98
+108
+111
+103
+47
+97
+114
+99
+104
+105
+118
+101
+115
+47
+50
+48
+49
+55
+47
+49
+50
+47
+101
+45
+109
+97
+105
+108
+95
+116
+114
+97
+99
+107
+105
+110
+103
+95
+49
+46
+104
+116
+109
+108
+32
+89
+105
+107
+101
+115
+33
+32
+89
+111
+117
+114
+32
+102
+114
+105
+101
+110
+100
+44
+32
+65
+108
+105
+99
+101
+
+Decrypted message: Dear Bob, Check this out. https://www.schneier.com/blog/archives/2017/12/e-mail_tracking_1.html Yikes! Your friend, Alice
+
+
+The process would have failed when trying to identify the d, p, and q. For p and q, we figured it out by brute force but that would be significantly more difficult at larger numbers. Also, f the d is constrained by the value of n, for a small value like 4661 you could figure out the value of d with much larger integers there may be several possible values of d that are less than n(or whatever the correct constraint is(see our question from above)) and only Bob can know which is the correct d to use for the private key to decrypt the message.
